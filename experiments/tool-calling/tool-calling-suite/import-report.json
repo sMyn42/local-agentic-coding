@@ -1,0 +1,23 @@
+{
+  "openapi_version": "3.0.3",
+  "operations": [
+    {
+      "tool": "issues_get_cf0062ad",
+      "method": "GET",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}"
+    },
+    {
+      "tool": "issues_list-comments_e6abc434",
+      "method": "GET",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/comments"
+    },
+    {
+      "tool": "issues_create-comment_27544d18",
+      "method": "POST",
+      "path": "/repos/{owner}/{repo}/issues/{issue_number}/comments"
+    }
+  ],
+  "skipped": [],
+  "filtered_operations": 0,
+  "warnings": []
+}

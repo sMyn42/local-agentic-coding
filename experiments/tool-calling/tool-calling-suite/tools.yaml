@@ -1,0 +1,224 @@
+bundles:
+  main:
+  - name: issues_get_cf0062ad
+    description: 'Get an issue
+
+
+      The API returns a [`301 Moved Permanently` status](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api#follow-redirects)
+      if the issue was
+
+      [transferred](https://docs.github.com/articles/transferring-an-issue-to-another-repository/)
+      to another repository. If
+
+      the issue was transferred to or deleted from a repository where the authenticated
+      user lacks read access, the API
+
+      returns a `404 Not Found` status. If the issue was deleted from a repository
+      where the authenticated user has read
+
+      access, the API returns a `410 Gone` status. To receive webhook events for transferred
+      and deleted issues, subscribe
+
+      to the [`issues`](https://docs.github.com/webhooks/event-payloads/#issues) webhook.
+
+
+      > [!NOTE]
+
+      > GitHub''s REST API considers every pull request an issue, but not every issue
+      is a pull request. For this reason, "Issues" endpoints may return both issues
+      and pull requests in the response. You can identify pull requests by the `pull_request`
+      key. Be aware that the `id` of a pull request returned from "Issues" endpoints
+      will be an _issue id_. To find out the pull request id, use the "[List pull
+      requests](https://docs.github.com/rest/pulls/pulls#list-pull-requests)" endpoint.
+
+
+      This endpoint supports the following custom media types. For more information,
+      see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)."
+
+
+      - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response
+      will include `body`. This is the default if you do not pass any specific media
+      type.
+
+      - **`application/vnd.github.text+json`**: Returns a text only representation
+      of the markdown body. Response will include `body_text`.
+
+      - **`application/vnd.github.html+json`**: Returns HTML rendered from the body''s
+      markdown. Response will include `body_html`.
+
+      - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations.
+      Response will include `body`, `body_text`, and `body_html`.
+
+
+      GET /repos/{owner}/{repo}/issues/{issue_number}'
+    parameters:
+      type: object
+      properties:
+        path:
+          type: object
+          properties:
+            owner:
+              type: string
+              description: The account owner of the repository. The name is not case
+                sensitive.
+            repo:
+              type: string
+              description: The name of the repository without the `.git` extension.
+                The name is not case sensitive.
+            issue_number:
+              type: integer
+              description: The number that identifies the issue.
+          additionalProperties: false
+          required:
+          - owner
+          - repo
+          - issue_number
+      additionalProperties: false
+      required:
+      - path
+  - name: issues_list-comments_e6abc434
+    description: 'List issue comments
+
+
+      You can use the REST API to list comments on issues and pull requests. Every
+      pull request is an issue, but not every issue is a pull request.
+
+
+      Issue comments are ordered by ascending ID.
+
+
+      This endpoint supports the following custom media types. For more information,
+      see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)."
+
+
+      - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response
+      will include `body`. This is the default if you do not pass any specific media
+      type.
+
+      - **`application/vnd.github.text+json`**: Returns a text only representation
+      of the markdown body. Response will include `body_text`.
+
+      - **`application/vnd.github.html+json`**: Returns HTML rendered from the body''s
+      markdown. Response will include `body_html`.
+
+      - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations.
+      Response will include `body`, `body_text`, and `body_html`.
+
+
+      GET /repos/{owner}/{repo}/issues/{issue_number}/comments'
+    parameters:
+      type: object
+      properties:
+        path:
+          type: object
+          properties:
+            owner:
+              type: string
+              description: The account owner of the repository. The name is not case
+                sensitive.
+            repo:
+              type: string
+              description: The name of the repository without the `.git` extension.
+                The name is not case sensitive.
+            issue_number:
+              type: integer
+              description: The number that identifies the issue.
+          additionalProperties: false
+          required:
+          - owner
+          - repo
+          - issue_number
+        query:
+          type: object
+          properties:
+            since:
+              type: string
+              format: date-time
+              description: 'Only show results that were last updated after the given
+                time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
+                format: `YYYY-MM-DDTHH:MM:SSZ`.'
+            per_page:
+              type: integer
+              default: 30
+              description: The number of results per page (max 100). For more information,
+                see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+            page:
+              type: integer
+              default: 1
+              description: The page number of the results to fetch. For more information,
+                see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+          additionalProperties: false
+      additionalProperties: false
+      required:
+      - path
+  - name: issues_create-comment_27544d18
+    description: 'Create an issue comment
+
+
+      You can use the REST API to create comments on issues and pull requests. Every
+      pull request is an issue, but not every issue is a pull request.
+
+
+      This endpoint triggers [notifications](https://docs.github.com/github/managing-subscriptions-and-notifications-on-github/about-notifications).
+
+      Creating content too quickly using this endpoint may result in secondary rate
+      limiting.
+
+      For more information, see "[Rate limits for the API](https://docs.github.com/rest/using-the-rest-api/rate-limits-for-the-rest-api#about-secondary-rate-limits)"
+
+      and "[Best practices for using the REST API](https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api)."
+
+
+      This endpoint supports the following custom media types. For more information,
+      see "[Media types](https://docs.github.com/rest/using-the-rest-api/getting-started-with-the-rest-api#media-types)."
+
+
+      - **`application/vnd.github.raw+json`**: Returns the raw markdown body. Response
+      will include `body`. This is the default if you do not pass any specific media
+      type.
+
+      - **`application/vnd.github.text+json`**: Returns a text only representation
+      of the markdown body. Response will include `body_text`.
+
+      - **`application/vnd.github.html+json`**: Returns HTML rendered from the body''s
+      markdown. Response will include `body_html`.
+
+      - **`application/vnd.github.full+json`**: Returns raw, text, and HTML representations.
+      Response will include `body`, `body_text`, and `body_html`.
+
+
+      POST /repos/{owner}/{repo}/issues/{issue_number}/comments'
+    parameters:
+      type: object
+      properties:
+        path:
+          type: object
+          properties:
+            owner:
+              type: string
+              description: The account owner of the repository. The name is not case
+                sensitive.
+            repo:
+              type: string
+              description: The name of the repository without the `.git` extension.
+                The name is not case sensitive.
+            issue_number:
+              type: integer
+              description: The number that identifies the issue.
+          additionalProperties: false
+          required:
+          - owner
+          - repo
+          - issue_number
+        body:
+          type: object
+          properties:
+            body:
+              type: string
+              description: The contents of the comment.
+          required:
+          - body
+      additionalProperties: false
+      required:
+      - path
+      - body
